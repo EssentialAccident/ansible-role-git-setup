@@ -1,0 +1,24 @@
+---
+- name: Install git
+  ansible.builtin.package:
+    name: git
+    state: latest
+  become: yes
+
+- name: Configure user name
+  community.general.git_config:
+    name: user.name
+    scope: global
+    value: "{{ git_user_name }}"
+
+- name: Configure user email
+  community.general.git_config:
+    name: user.email
+    scope: global
+    value: "{{ git_user_email }}"
+
+- name: Other git configuration
+  community.general.git_config:
+    name: color.ui
+    scope: global
+    value: true
